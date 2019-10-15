@@ -1,28 +1,18 @@
 import pytest
+from selenium import webdriver
+import time
+import math
 
+answer = str(math.log(int(time.time())))
+link = "https://stepik.org/lesson/236899/step/1"
 
-@pytest.fixture(scope="class")
-def prepare_faces():
-    print("^_^", "\n")
-    yield
-    print(":3", "\n")
+try:
+    browser = webdriver.Chrome()
+    browser.get(link)
+    browser.implicitly_wait(5)
+    browser.find_element_by_class_name("textarea").send_keys(answer)
+    browser.find_element_by_class_name("submit-submission").click()
 
-
-@pytest.fixture()
-def very_important_fixture():
-    print(":)", "\n")
-
-
-@pytest.fixture(autouse=True)
-def print_smiling_faces():
-    print(":-Р", "\n")
-
-x = 1
-y = 2
-
-class TestPrintSmilingFaces():
-    def test_first_smiling_faces(self, prepare_faces, very_important_fixture):
-        assert x < y, "x больше y"
-
-    def test_second_smiling_faces(self, prepare_faces):
-        assert x == y, "x не равен y"
+finally:
+    time.sleep(50)
+    browser.quit()

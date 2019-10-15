@@ -40,6 +40,7 @@ class TestBookPage():
         assert True
 
 
+
 # номер 7
 @pytest.mark.beta_users
 @pytest.mark.smoke
